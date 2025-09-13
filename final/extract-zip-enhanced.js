@@ -616,23 +616,6 @@ async function extractOriginalToZip(element) {
   return { zipGenerated: true, result };
 }
 
-// 便捷方法：右上角控制面板
-(function mountPanel(){
-  if (document.getElementById('extract-zip-panel')) return;
-  const panel = document.createElement('div');
-  panel.id = 'extract-zip-panel';
-  panel.style.cssText = `position:fixed;top:20px;right:20px;background:#111;color:#fff;padding:16px;border-radius:10px;z-index:999999;font-family:system-ui;max-width:360px;box-shadow:0 10px 30px rgba(0,0,0,.3);`;
-  panel.innerHTML = `
-    <div style="font-weight:700;margin-bottom:10px">📦 组件资源打包器</div>
-    <div style="opacity:.8;font-size:13px;margin-bottom:12px">在控制台输入 <code>extractOriginalToZip($0)</code>，或点击下方按钮。</div>
-    <button id="btn-extract-zip" style="display:block;width:100%;padding:10px 12px;border:0;border-radius:8px;background:#fff;color:#111;font-weight:700;cursor:pointer">下载 ZIP</button>
-    <button id="btn-extract-zip-close" style="display:block;width:100%;padding:8px 12px;border:0;border-radius:8px;background:transparent;color:#fff;margin-top:8px;border:1px solid rgba(255,255,255,.3);cursor:pointer">关闭</button>
-  `;
-  document.body.appendChild(panel);
-  panel.querySelector('#btn-extract-zip').onclick = () => extractOriginalToZip($0).catch(e => alert('打包失败：'+ e.message));
-  panel.querySelector('#btn-extract-zip-close').onclick = () => panel.remove();
-})();
-
 window.extractOriginalToZip = extractOriginalToZip;
 
 console.log(`\n🎯 组件资源打包器已就绪\n使用：extractOriginalToZip($0)\n`);
